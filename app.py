@@ -34,12 +34,11 @@ def add():
     #spider_name = "coin_spider.py"
     #subprocess.check_output(['scrapy', 'runspider', spider_name, "-o", "out.json"])
     with open("out.json") as items_file:
-        result = json.loads(items_file.read())
-        print(result)
-        for r in result:
-            client.cselab.data.insert(r)
+        res = json.loads(items_file.read())
+        for r in res:
+            client.lab_2.data.insert(r)
     client.close()
-    return "helloworld"
+    return '-'
 
 
 if __name__ == '__main__':
