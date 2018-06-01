@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lab2</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<table style="width:100%" class="table table-striped">
+    <tr>
+        <th style="width:15%">Тема</th>
+        <th style="width:15%">Дата</th>
+        <th style="width:10%">Автор</th>
+        <th style="width:50%">Повідомлення</th>
+    </tr>
+    {% for d in data %}
+        <tr>
+            <td>{{ d['topic'] }}</td>
+            <td>{{ d['date'] }}</td>
+            <td><a href="/{{ d['topic'] }}/{{ d['author'] }}">{{ d['author'] }}</a></td>
+            <td>{{ d['message'] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<div class="container">
+    <ul class="pagination">
+        {% if page > 0 %}
+            <li><a href='/?page=0'>Перша</a>
+            <li><a href='/?page={{ page-1 }}'>Попередня сторінка</a>
+        {% endif %}
+        <li class="active"><a>{{ page + 1 }}</a></li>
+        {% if page < pages %}
+            {% if page + 1 != pages %}
+                <li><a href='/?page={{ page + 1 }}'>Наступна сторінка</a></li>
+                <li><a href='/?page={{ pages }}'>Остання</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</div>
+</body>
