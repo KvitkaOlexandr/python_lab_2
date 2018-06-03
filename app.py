@@ -25,7 +25,8 @@ def topic_author(topic, author):
     rec = data.find({'topic': topic, 'author': author})
     author_messages_count = data.count({'topic': topic, 'author': author})
     topic_messages_count = data.count({'topic': topic})
-    return render_template('topic_author.html', data=[d for d in rec], author_messages_count=author_messages_count,
+    print(topic_messages_count)
+    return render_template('authors.html', data=[d for d in rec], author_messages_count=author_messages_count,
                            topic_messages_count=topic_messages_count)
 
 
