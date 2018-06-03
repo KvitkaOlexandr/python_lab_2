@@ -25,21 +25,20 @@ def topic_author(topic, author):
     rec = data.find({'topic': topic, 'author': author})
     author_messages_count = data.count({'topic': topic, 'author': author})
     topic_messages_count = data.count({'topic': topic})
-    print(topic_messages_count)
     return render_template('authors.html', data=[d for d in rec], author_messages_count=author_messages_count,
                            topic_messages_count=topic_messages_count)
 
 
-@app.route('/add')
-def add():
-    #spider_name = "coin_spider.py"
-    #subprocess.check_output(['scrapy', 'runspider', spider_name, "-o", "out.json"])
-    with open("out.json") as items_file:
+@app.route('/update')
+def update():
+    spider_name = 'spider.py'
+    subprocess.check_output(['scrapy', 'runspider', spider_name, '-o', 'out.json'])
+    with open('out.json') as items_file:
         res = json.loads(items_file.read())
         for r in res:
             client.lab_2.data.insert(r)
     client.close()
-    return '-'
+    return index()
 
 
 if __name__ == '__main__':
